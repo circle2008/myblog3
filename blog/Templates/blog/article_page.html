@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/uikit.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/uikit.gradient.min.css">
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/uikit.min.js"></script>
+</head>
+<body>
+<nav class="uk-navbar uk-navbar-attached uk-margin-bottom">
+        <div class="uk-container uk-container-center">
+            <a href="{% url 'blog:index' %}" class="uk-navbar-brand">circle的个人博客</a>
+            <ul class="uk-navbar-nav">
+                <li data-url="blogs"><a href="{% url 'blog:index' %}"><i class="uk-icon-home"></i> 博客列表</a></li>
+            </ul>
+
+        </div>
+</nav>
+<div class="uk-container uk-container-center">
+        <div class="uk-grid">
+            <!-- content -->
+                <div class="uk-width-medium-3-4">
+                     <article class="uk-article">
+                        <h2>{{ article.title }}</h2>
+                        <p class="uk-article-meta">发表于{{ article.pub_time }}</p>
+                        <p>{{ article.content }}</p>
+                    </article>
+                    <hr class="uk-article-divider">
+                    <a href="{% url 'blog:edit_page' article.id %}" class="uk-button uk-button-primary"><i class="uk-icon-edit"></i> 修改blog</a>
+                </div>
+                <div class="uk-width-medium-1-4">
+                        <div class="uk-panel uk-panel-header">
+                            <h3 class="uk-panel-title">博客列表</h3>
+                            <ul class="uk-list uk-list-line">
+                                {% for article in articles %}
+                                    <li><i class="uk-icon-thumbs-o-up"></i> <a target="_blank" href="{% url 'blog:article_page' article.id %}">{{ article.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                 </div>
+            <!-- // content -->
+        </div>
+</div>
+</body>
+</html>
